@@ -64,11 +64,20 @@ public class TupleTest {
     }    
     
     @Test
-    public void testEquals_WithNullTermOneNull() {
+    public void testEquals_WithNullTermOneNull_First() {
         Tuple obj = new Tuple(null, 5);
         Tuple instance = new Tuple("bingo", 5);
         boolean expResult = false;
         boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
+    }    
+    
+    @Test
+    public void testEquals_WithNullTermOneNull_Second() {
+        Tuple obj = new Tuple(null, 5);
+        Tuple instance = new Tuple("bingo", 5);
+        boolean expResult = false;
+        boolean result = obj.equals(instance);
         assertEquals(expResult, result);
     }    
     

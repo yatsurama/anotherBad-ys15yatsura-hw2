@@ -15,20 +15,8 @@ public class RWayTrie implements Trie {
         private int val = EMPTY_VAL;
         private Node[] next = new Node[R];
         
-        public void setValue(int value) {
-            val = value;
-        }
-        
         public int getValue() {
             return val;
-        }
-        
-        public void setNext(char c) {
-            next[indexOf(c)] = new Node();
-        }
-        
-        public Node getNext(char c) {
-            return next[indexOf(c)];
         }
     }  
     
@@ -215,13 +203,9 @@ public class RWayTrie implements Trie {
             word = null;
             next = null;
         }
-
-        public WordsIter(String word) {
-            this.word = word;
-        }
         
         public WordsIter(Iterator<String> iter) {
-            if (this instanceof WordsIter) {
+            if (iter instanceof WordsIter) {
                 this.next = (WordsIter) iter;
             }    
             this.next = this.next.next;
@@ -230,14 +214,11 @@ public class RWayTrie implements Trie {
         
         @Override
         public boolean hasNext() {
-            return next != null && next.word != null;
+            return next.word != null;
         }
 
         @Override
         public String next() throws NoSuchElementException {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            }
             word = next.word;
             next = next.next;
             return word;

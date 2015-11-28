@@ -1,6 +1,7 @@
 package ua.yandex.shad.autocomplete;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
@@ -212,7 +213,6 @@ public class PrefixMatchesTest {
         String[] strings = { "tor", "tork", "tors", "torz", "torpo", "torps",
                              "torok", "tortoi", "torpson", "torrfgf"};
         int len = prefMatches.load(strings);
-        System.out.println(len);
         Iterable<String> words = prefMatches.wordsWithPrefix("tor", 9);
         Iterator<String> iterator = words.iterator();
         String[] expArray = { "tor", "tork", "tors", "torz", "torok", "torpo",
@@ -234,7 +234,6 @@ public class PrefixMatchesTest {
         PrefixMatches prefMatches = new PrefixMatches();
         String[] strings = { "bor", "bork", "bors", "borz"};
         int len = prefMatches.load(strings);
-        System.out.println(len);
         Iterable<String> words = prefMatches.wordsWithPrefix("bo", 1);
         Iterator<String> iterator = words.iterator();
         String[] expArray = { "bor" };
@@ -248,6 +247,14 @@ public class PrefixMatchesTest {
             }
         }        
         assertTrue(equalArrays && index == 1); 
+    }
+    
+   @Test(expected = IllegalArgumentException.class)
+    public void testWordsWithPrefix_String_int_ShortPrefix() {
+        PrefixMatches prefMatches = new PrefixMatches();
+        String[] strings = { "bor", "bork", "bors", "borz"};
+        int len = prefMatches.load(strings);
+        Iterable<String> words = prefMatches.wordsWithPrefix("b", 2);
     }
     
     @Test

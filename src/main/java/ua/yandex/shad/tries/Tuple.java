@@ -33,7 +33,7 @@ public class Tuple {
         Tuple other = (Tuple) obj;
         boolean eqTerm = false;
         if (term == null) {
-            eqTerm = (other.term == null);
+            eqTerm = other.term == null;
         } else {
             eqTerm = term.equals(other.term);
         }
