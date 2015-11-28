@@ -6,6 +6,7 @@
 package ua.yandex.shad.tries;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -94,6 +95,20 @@ public class RWayTrieTest {
         
         assertTrue(trie.contains(""));
     }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testAdd_IllegalWord_Before_a() {
+        Tuple illegalTuple = new Tuple("abc!", 4);
+        RWayTrie trie = new RWayTrie();
+        trie.add(illegalTuple);
+    }    
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testAdd_IllegalWord_After_z() {
+        Tuple illegalTuple = new Tuple("abc|", 4);
+        RWayTrie trie = new RWayTrie();
+        trie.add(illegalTuple);
+    }  
     
     @Test
     public void testContains_ExistingWord() {
@@ -245,7 +260,7 @@ public class RWayTrieTest {
             }
         }        
         assertTrue(equalArrays && index == 5);
-    }
+    }   
     
     public void testWords_EmptyTrie() {
         RWayTrie trie = new RWayTrie();
@@ -259,7 +274,7 @@ public class RWayTrieTest {
             if (!expArray[index++].equals(iterator.next())) {
                 equalArrays = false;
             }
-        }        
+        }      
         assertTrue(equalArrays && index == 0);
     }
 

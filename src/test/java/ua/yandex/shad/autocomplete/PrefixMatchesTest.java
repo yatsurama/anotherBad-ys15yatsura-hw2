@@ -257,6 +257,14 @@ public class PrefixMatchesTest {
         Iterable<String> words = prefMatches.wordsWithPrefix("b", 2);
     }
     
+    @Test(expected = IllegalArgumentException.class)
+    public void testWordsWithPrefix_String_int_Negative_k() {
+        PrefixMatches prefMatches = new PrefixMatches();
+        String[] strings = { "tor", "tork", "tors", "torz", "torpo", "torps"};
+        prefMatches.load(strings);
+        Iterable<String> words = prefMatches.wordsWithPrefix("torn", -1);
+    }
+    
     @Test
     public void testSize_NonZeroSize() {
         when(trie.size()).thenReturn(42);

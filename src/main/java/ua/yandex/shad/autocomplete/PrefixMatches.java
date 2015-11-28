@@ -120,6 +120,9 @@ public class PrefixMatches {
 
         @Override
         public String next() throws NoSuchElementException {
+            if(!hasNext()) {
+                throw new NoSuchElementException();
+            }
             number++;
             return baseIterator.next();
         }

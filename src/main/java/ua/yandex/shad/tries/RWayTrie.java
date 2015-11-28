@@ -11,7 +11,7 @@ public class RWayTrie implements Trie {
     public static final int LETTER_SHIFT = 'a';
     private Node root = new Node();
     
-    private class Node {
+    private static  class Node {
         private int val = EMPTY_VAL;
         private Node[] next = new Node[R];
         
@@ -77,9 +77,6 @@ public class RWayTrie implements Trie {
     }
     
     private Node get(Node x, String s, int d) {
-        if (s == null) {
-            return null;
-        }
         if (x == null) {
             return null;
         }
@@ -95,7 +92,7 @@ public class RWayTrie implements Trie {
         if (x == null) {
             x = new Node();
         }
-        if (d == t.getTerm().length()) {
+        if (t.getTerm() != null && d == t.getTerm().length()) {
             x.val = t.getWeight();
             return x;
         }
@@ -105,7 +102,7 @@ public class RWayTrie implements Trie {
     }
     
     private Node delete(Node y, String s, int d) {
-        if (s == null || y == null) {
+        if (y == null) {
             return null;
         }
         
@@ -141,10 +138,12 @@ public class RWayTrie implements Trie {
         return cnt;
     }    
     
-    private void bfs(NodeWithWord x, WordsIter iterator) {
+    private void bfs(NodeWithWord x, WordsIter iter) {
         if (x.node == null) {
             return;
         }
+        
+        WordsIter iterator = iter;
         
         Queue<NodeWithWord> queue = new Queue<NodeWithWord>();
         queue.enqueue(x);
@@ -219,6 +218,9 @@ public class RWayTrie implements Trie {
 
         @Override
         public String next() throws NoSuchElementException {
+            if(!hasNext()) {
+                throw new NoSuchElementException();
+            }
             word = next.word;
             next = next.next;
             return word;
@@ -230,6 +232,7 @@ public class RWayTrie implements Trie {
         
         public WordsIter nextIter() {
             return next;
+  
         }
         
         public void setNext(WordsIter iterator) {
