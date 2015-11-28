@@ -1,6 +1,7 @@
 package ua.yandex.shad.tries;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import ua.yandex.shad.collections.Queue;
 
 public class RWayTrie implements Trie {
@@ -176,7 +177,7 @@ public class RWayTrie implements Trie {
         }
     }   
     
-    private class NodeWithWord {
+    private static class NodeWithWord {
         private final Node node;
         private final String word;
  
@@ -191,9 +192,9 @@ public class RWayTrie implements Trie {
         }
     }    
     
-    private class WordsIterable implements Iterable<String> {
+    private static class WordsIterable implements Iterable<String> {
 
-        Iterator<String> iterator;
+        private Iterator<String> iterator;
         
         @Override
         public Iterator<String> iterator() {
@@ -205,7 +206,7 @@ public class RWayTrie implements Trie {
         }
     }
     
-    private class WordsIter implements Iterator<String> {
+    private static class WordsIter implements Iterator<String> {
 
         private String word;
         private WordsIter next;
@@ -219,19 +220,24 @@ public class RWayTrie implements Trie {
             this.word = word;
         }
         
-        public WordsIter(Iterator<String> iterator) {
-            this.next = (WordsIter)iterator;
+        public WordsIter(Iterator<String> iter) {
+            if (this instanceof WordsIter) {
+                this.next = (WordsIter) iter;
+            }    
             this.next = this.next.next;
             this.word = this.next.word;
         }
         
         @Override
         public boolean hasNext() {
-            return (next != null && next.word != null);
+            return next != null && next.word != null;
         }
 
         @Override
-        public String next() {
+        public String next() throws NoSuchElementException {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
             word = next.word;
             next = next.next;
             return word;

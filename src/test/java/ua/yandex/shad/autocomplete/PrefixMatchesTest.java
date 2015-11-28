@@ -119,7 +119,6 @@ public class PrefixMatchesTest {
             if (!expArray[index++].equals(word)) {
                 equalArrays = false;
             }
-            System.out.println(word);
         }        
         assertTrue(equalArrays && index == 7);         
     }
@@ -140,7 +139,6 @@ public class PrefixMatchesTest {
             if (!expArray[index++].equals(word)) {
                 equalArrays = false;
             }
-            System.out.println(word);
         }        
         assertTrue(equalArrays && index == 3);     
     }
@@ -161,7 +159,6 @@ public class PrefixMatchesTest {
             if (!expArray[index++].equals(word)) {
                 equalArrays = false;
             }
-            System.out.println(word);
         }        
         assertTrue(equalArrays && index == 3);        
     }
@@ -184,7 +181,6 @@ public class PrefixMatchesTest {
             if (!expArray[index++].equals(word)) {
                 equalArrays = false;
             }
-            System.out.println(word);
         }        
         assertTrue(equalArrays && index == 8); 
     }
@@ -206,7 +202,6 @@ public class PrefixMatchesTest {
             if (!expArray[index++].equals(word)) {
                 equalArrays = false;
             }
-            System.out.println(word);
         }        
         assertTrue(equalArrays && index == 0); 
     }
@@ -230,7 +225,6 @@ public class PrefixMatchesTest {
             if (!expArray[index++].equals(word)) {
                 equalArrays = false;
             }
-            System.out.println(word);
         }        
         assertTrue(equalArrays && index == 10); 
     }
@@ -252,7 +246,6 @@ public class PrefixMatchesTest {
             if (!expArray[index++].equals(word)) {
                 equalArrays = false;
             }
-            System.out.println(word);
         }        
         assertTrue(equalArrays && index == 1); 
     }

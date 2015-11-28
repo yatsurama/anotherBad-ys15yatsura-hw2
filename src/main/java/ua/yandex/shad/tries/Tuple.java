@@ -1,8 +1,8 @@
 package ua.yandex.shad.tries;
 
 public class Tuple {
-    public final String term;
-    public final int weight;
+    private final String term;
+    private final int weight;
     
     public Tuple() {
         term = "";
@@ -34,7 +34,9 @@ public class Tuple {
         boolean eqTerm = false;
         if (term == null) {
             eqTerm = (other.term == null);
-        } else eqTerm = term.equals(other.term);
+        } else {
+            eqTerm = term.equals(other.term);
+        }
         return eqTerm && weight == other.weight;   
     }
     

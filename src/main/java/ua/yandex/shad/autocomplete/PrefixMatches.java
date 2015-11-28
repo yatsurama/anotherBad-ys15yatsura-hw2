@@ -1,6 +1,7 @@
 package ua.yandex.shad.autocomplete;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import ua.yandex.shad.tries.Tuple;
 import ua.yandex.shad.tries.Trie;
 import ua.yandex.shad.tries.RWayTrie;
@@ -64,10 +65,10 @@ public class PrefixMatches {
                 count++;
         }
         
-        if(param == 0) {
+        if (param == 0) {
             while (iterator.hasNext()) {
                 curWord = iterator.next();
-                if(curWord.length() != prevWord.length()) {
+                if (curWord.length() != prevWord.length()) {
                     break;
                 }
                 prevWord = curWord;
@@ -85,9 +86,9 @@ public class PrefixMatches {
         return trie.size();
     }
     
-    private class WordsIterable implements Iterable<String> {
+    private static class WordsIterable implements Iterable<String> {
 
-        Iterator<String> iterator;
+        private Iterator<String> iterator;
         
         @Override
         public Iterator<String> iterator() {
@@ -99,7 +100,7 @@ public class PrefixMatches {
         }
     }
     
-    private class WordsIter implements Iterator<String> {
+    private static class WordsIter implements Iterator<String> {
 
         private Iterator<String> baseIterator;
         private int numWords;
@@ -118,7 +119,10 @@ public class PrefixMatches {
         }
 
         @Override
-        public String next() {
+        public String next() throws NoSuchElementException {
+            if(!hasNext()) {
+                throw new NoSuchElementException();
+            }
             number++;
             return baseIterator.next();
         }

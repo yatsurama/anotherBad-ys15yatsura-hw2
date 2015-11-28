@@ -1,6 +1,5 @@
 package ua.yandex.shad.collections;
 
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
@@ -11,7 +10,6 @@ public class Queue<Item> {
 
     private Node<Item> first;   
     private Node<Item> last; 
-    private int count; 
     
     private static class Node<Item> {
 
@@ -22,7 +20,6 @@ public class Queue<Item> {
     public Queue() {
         first = null;
         last = null;
-        count = 0;
     }
     
     public Item peek() {
@@ -43,7 +40,6 @@ public class Queue<Item> {
         else {
             oldLast.next = last;
         }
-        count++;
     }
     
     public Item dequeue() {
@@ -56,12 +52,11 @@ public class Queue<Item> {
         if (isEmpty()) {
             last = null;
         }  
-        count--;
         return item;
     }
     
     public boolean isEmpty() {
-        return (first == null);
+        return first == null;
     }
 
 }
