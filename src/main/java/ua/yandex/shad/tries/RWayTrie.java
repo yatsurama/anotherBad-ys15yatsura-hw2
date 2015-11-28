@@ -92,7 +92,7 @@ public class RWayTrie implements Trie {
         if (x == null) {
             x = new Node();
         }
-        if (t.getTerm() != null && d == t.getTerm().length()) {
+        if (d == t.getTerm().length()) {
             x.val = t.getWeight();
             return x;
         }
@@ -218,7 +218,7 @@ public class RWayTrie implements Trie {
 
         @Override
         public String next() throws NoSuchElementException {
-            if(!hasNext()) {
+            if (!hasNext()) {
                 throw new NoSuchElementException();
             }
             word = next.word;
